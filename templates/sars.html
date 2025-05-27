@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Machine Learning Stunting Classification</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16"
+        href="{{ url_for('static', filename='assets/images/favicon.png') }}">
+    <link href="{{ url_for('static', filename='assets/css/style.css') }}" rel="stylesheet">
+    <script src="{{ url_for('static', filename='assets/js/modernizr-3.6.0.min.js') }}"></script>
+</head>
+
+<body class="v-light mini-nav fix-header fix-sidebar">
+    <div id="preloader">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />
+            </svg>
+        </div>
+    </div>
+    <div id="main-wrapper">
+        <!-- header -->
+        <div class="header">
+            <div class="nav-header">
+                <div class="brand-logo"><a href="{{ url_for('index') }}"><b><img
+                                src="{{ url_for('static', filename='assets/images/logo.png') }}" alt=""> </b><span
+                            class="brand-title"><img
+                                src="{{ url_for('static',filename='assets/images/logo-text.png') }}" alt=""></span></a>
+                </div>
+                <div class="nav-control">
+                    <div class="hamburger"><span class="line"></span> <span class="line"></span> <span
+                            class="line"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- #/ header -->
+        <!-- sidebar -->
+        <div class="nk-sidebar">
+            <div class="nk-nav-scroll">
+                <ul class="metismenu" id="menu">
+                    <li class="nav-label">Main</li>
+                    <li><a href="{{ url_for('stunting') }}"><i class=" mdi mdi-view-dashboard"></i> <span
+                                class="nav-text">Malnutrion</span></a>
+                    <li><a href="{{ url_for('sars') }}"><i class=" mdi mdi-view-dashboard"></i> <span class="nav-text">Sars-Cov-2</span></a>
+                    </li>
+                </ul>
+            </div>
+            <!-- #/ nk nav scroll -->
+        </div>
+        <!-- #/ sidebar -->
+        <!-- content body -->
+        <div class="content-body">
+            <div class="container">
+                <div class="row page-titles">
+                    <div class="col p-0">
+                        <h4>Hello, <span>Welcome to Machine Learning Sars-Cov-2 Prediction</span></h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4>LogisticRegression <span class="pull-right"></span></h4>
+                                <h6 class="m-t-20 f-s-14">Model Akurasi 86% </h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4>RandomForest <span class="pull-right"></span></h4>
+                                <h6 class="m-t-20 f-s-14">Model Akurasi 87% </h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-validation">
+                                    <form class="form-valide" action="{{ url_for('sars') }}" method="post">
+
+                                        <!-- Jenis Kelamin-->
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label">Jenis Kelamin?<span
+                                                    class="text-danger">*</span></label>
+                                            <div class="col-lg-6">
+                                                <select class="form-control" name="jk" required>
+                                                    <option value="" selected disabled>Pilih satu</option>
+                                                    <option value="1">Laki-laki</option>
+                                                    <option value="0">Perempuan</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <!-- Usia -->
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label">Usia <span
+                                                    class="text-danger">*</span></label>
+                                            <div class="col-lg-6">
+                                                <input type="number" step="0.1" class="form-control" name="usia"
+                                                    placeholder="Contoh: 2.0" required>
+                                            </div>
+                                        </div>
+
+                                        <!-- Gejala: Demam -->
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label">Apakah Anda Mengalami Demam?<span
+                                                    class="text-danger">*</span></label>
+                                            <div class="col-lg-6">
+                                                <select class="form-control" name="demam" required>
+                                                    <option value="" selected disabled>Pilih satu</option>
+                                                    <option value="1">Ya</option>
+                                                    <option value="0">Tidak</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <!-- Gejala: Batuk -->
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label">Apakah Anda Mengalami Batuk?<span
+                                                    class="text-danger">*</span></label>
+                                            <div class="col-lg-6">
+                                                <select class="form-control" name="batuk" required>
+                                                    <option value="" selected disabled>Pilih satu</option>
+                                                    <option value="1">Ya</option>
+                                                    <option value="0">Tidak</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <!-- Gejala: Pilek -->
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label">Apakah Anda Mengalami Pilek?<span
+                                                    class="text-danger">*</span></label>
+                                            <div class="col-lg-6">
+                                                <select class="form-control" name="pilek" required>
+                                                    <option value="" selected disabled>Pilih satu</option>
+                                                    <option value="1">Ya</option>
+                                                    <option value="0">Tidak</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <!-- Gejala: Nyeri Otot -->
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label">Apakah Anda Mengalami Nyeri
+                                                Otot?<span class="text-danger">*</span></label>
+                                            <div class="col-lg-6">
+                                                <select class="form-control" name="nyeri_otot" required>
+                                                    <option value="" selected disabled>Pilih satu</option>
+                                                    <option value="1">Ya</option>
+                                                    <option value="0">Tidak</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <!-- Gejala: Pneumonia -->
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label">Apakah Anda Mengalami Pneumonia?<span
+                                                    class="text-danger">*</span></label>
+                                            <div class="col-lg-6">
+                                                <select class="form-control" name="pneumonia" required>
+                                                    <option value="" selected disabled>Pilih satu</option>
+                                                    <option value="1">Ya</option>
+                                                    <option value="0">Tidak</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <!-- Gejala: Diare -->
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label">Apakah Anda Mengalami Diare?<span
+                                                    class="text-danger">*</span></label>
+                                            <div class="col-lg-6">
+                                                <select class="form-control" name="diare" required>
+                                                    <option value="" selected disabled>Pilih satu</option>
+                                                    <option value="1">Ya</option>
+                                                    <option value="0">Tidak</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <!-- Gejala: Infeksi Paru-Paru -->
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label">Apakah Anda Mengalami Infeksi
+                                                Paru-paru?<span class="text-danger">*</span></label>
+                                            <div class="col-lg-6">
+                                                <select class="form-control" name="infeksi_paru" required>
+                                                    <option value="" selected disabled>Pilih satu</option>
+                                                    <option value="1">Ya</option>
+                                                    <option value="0">Tidak</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <!-- Isolasi -->
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label">Apakah Anda Melakukan Isolasi 1
+                                                minggu sebelumnya?<span class="text-danger">*</span></label>
+                                            <div class="col-lg-6">
+                                                <select class="form-control" name="isolasi" required>
+                                                    <option value="" selected disabled>Pilih satu</option>
+                                                    <option value="1">Ya</option>
+                                                    <option value="0">Tidak</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <!-- Submit -->
+                                        <div class="form-group row">
+                                            <div class="col-lg-8 ml-auto">
+                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Hasil Prediksi</h4>
+                                <div class="timeline-">
+                                    <ul class="timeline">
+                                        {% if hasil %}
+                                        {% for model, info in hasil.items() %}
+                                        <li>
+                                            <div class="timeline-badge success"></div>
+                                            <a href="#" class="timeline-panel text-muted">
+                                                <span>{{ model }}</span>
+                                                <h6 class="m-t-5">{{ info.result }} ({{ info.confidence }})</h6>
+                                            </a>
+                                        </li>
+                                        {% endfor %}
+                                        {% else %}
+                                        <li>
+                                            <div class="timeline-badge warning"></div>
+                                            <a href="#" class="timeline-panel text-muted">
+                                                <span>Belum ada prediksi</span>
+                                                <h6 class="m-t-5">Silakan isi form</h6>
+                                            </a>
+                                        </li>
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- #/ container -->
+            </div>
+            <!-- #/ content body -->
+        </div>
+        <!-- Common JS -->
+        <script src="{{ url_for('static', filename='assets/plugins/common/common.min.js') }}"></script>
+        <!-- Custom script -->
+        <script src="{{ url_for('static',filename='assets/js/custom+mini-nav.js') }}"></script>
+        <!-- Chartjs chart -->
+        <script src="{{ url_for('static', filename='assets/plugins/chartjs/Chart.bundle.js') }}"></script>
+        <!-- Custom dashboard script -->
+        <script src="{{ url_for('static', filename='assets/js/dashboard-1.js') }}"></script>
+        <!-- Form Validation -->
+        <script src="{{ url_for('static', filename='assets/plugins/validation/jquery.validate.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/plugins/validation/jquery.validate-init.js') }}"></script>
+</body>
+
+</html>
